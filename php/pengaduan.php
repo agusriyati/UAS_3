@@ -5,7 +5,7 @@ interface PengaduanInterface { //
     public function insertData($data);//interfacenya polimorphism untuk mendefinisikan satu atau lebih metode 
 }
 
-class Pengadu implements PengaduanInterface {//ada konsep oop Claass (kelas induk)
+class Pengadu implements PengaduanInterface {//ada konsep oop Claass (kelas indukkk)
     protected $conn;//encapsulasi karena hanya dapat diakses oleh kelas induk dan juga kelas turunan(terbungkus)
 
     public function __construct($conn)
