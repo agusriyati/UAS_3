@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if(!isset($_SESSION['username'])){
-  header('location: login.php');
-  exit;
+if (!isset($_SESSION['username'])) {
+    header('location: login.php');
+    exit;
 }
 
 ?>
@@ -45,7 +45,7 @@ if(!isset($_SESSION['username'])){
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.php">
             <span>
-              PBO
+              SELAMAT UJIAN
             </span>
           </a>
 
@@ -199,14 +199,14 @@ if(!isset($_SESSION['username'])){
   <!-- end case section -->
 
   <?php
-  include '../php/config.php';
-  if (isset($_POST['tambah'])){
+include '../php/config.php';
+if (isset($_POST['tambah'])) {
     mysqli_query($conn, "INSERT INTO subscribe SET
     email = '$_POST[sub]'");
-    
+
     echo "<script>alert('Email telah berhasil dikirim')</script>";
-  }
-  ?>
+}
+?>
 
   <div class="footer_container">
     <!-- info section -->
