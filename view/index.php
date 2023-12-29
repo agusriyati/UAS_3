@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.php">
             <span>
-              SELAMAT UJIAN
+              Selamat Ujian
             </span>
           </a>
 
