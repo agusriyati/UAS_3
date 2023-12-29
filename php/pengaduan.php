@@ -1,12 +1,14 @@
 <?php
 include 'config.php';
 
-interface PengaduanInterface { //
-    public function insertData($data);//interfacenya polimorphism untuk mendefinisikan satu atau lebih metode 
+interface PengaduanInterface
+{ //
+    public function insertData($data); //interfacenya polimorphism untuk mendefinisikan satu atau lebih metode
 }
 
-class Pengadu implements PengaduanInterface {//ada konsep oop Claass (kelas indukkk)
-    protected $conn;//encapsulasi karena hanya dapat diakses oleh kelas induk dan juga kelas turunan(terbungkus)
+class Pengadu implements PengaduanInterface
+{ //ada konsep oop Claass (kelas indukkk)
+    protected $conn; //encapsulasi karena hanya dapat diakses oleh kelas induk dan juga kelas turunan(terbungkus)
 
     public function __construct($conn)
     {
@@ -30,7 +32,8 @@ class Pengadu implements PengaduanInterface {//ada konsep oop Claass (kelas indu
     }
 }
 
-class Kejadian extends Pengadu implements PengaduanInterface { //ya karena pada kelas kejadian terdapat kelas (override),dari metode insertdata yang juga ada di kelas pengadu.dalam hal ini 
+class Kejadian extends Pengadu implements PengaduanInterface
+{ //ya karena pada kelas kejadian terdapat kelas (override),dari metode insertdata yang juga ada di kelas pengadu.dalam hal ini
     public function insertData($data) // polimorphism karena sama method dan beda perlakuan atau akan masuk ke class kejadian
     {
         $query = "INSERT INTO kejadian SET
@@ -44,16 +47,17 @@ class Kejadian extends Pengadu implements PengaduanInterface { //ya karena pada 
     }
 }
 
-class PengaduanHandler {
+class PengaduanHandler
+{
     public function createPengaduan(PengaduanInterface $pengaduanObj, $data)
     {
-        $pengaduanObj->insertData($data);// polimorphism karena sama method dan beda perlakuan atau akan masuk ke class pengaduan
+        $pengaduanObj->insertData($data); // polimorphism karena sama method dan beda perlakuan atau akan masuk ke class pengaduan
         echo "<script>alert('Berhasil Membuat Pengaduan')</script>";
     }
 }
 
 if (isset($_POST['buat'])) {
-    $pengaduanHandler = new PengaduanHandler();//objek
+    $pengaduanHandler = new PengaduanHandler(); //objek
 
     $pengaduData = array(
         'nama' => $_POST['nama'],
@@ -64,7 +68,7 @@ if (isset($_POST['buat'])) {
         'domisili' => $_POST['domisili'],
         'nomor_telpon' => $_POST['nomor_telpon'],
         'nomor_fax' => $_POST['nomor_fax'],
-        'email' => $_POST['email']
+        'email' => $_POST['email'],
     );
 
     $kejadianData = array(
@@ -72,7 +76,7 @@ if (isset($_POST['buat'])) {
         'lokasi' => $_POST['lokasi'],
         'tanggal' => $_POST['tanggal'],
         'harapan' => $_POST['harapan'],
-        'file_pendukung' => $_POST['file_pendukung']
+        'file_pendukung' => $_POST['file_pendukung'],
     );
 
     // Membuat objek untuk Pengadu
@@ -82,5 +86,8 @@ if (isset($_POST['buat'])) {
     // Membuat objek untuk Kejadian
     $kejadian = new Kejadian($conn);
     $pengaduanHandler->createPengaduan($kejadian, $kejadianData);
+
+    $fileHandler = new FileHandler('/path/to/storage');
+    $fileHandler->uploadFile($_FILES['uploaded_file']);
+
 }
-?>
